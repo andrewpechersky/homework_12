@@ -22,15 +22,26 @@ class Bot:
     def input_error(func):
         def inner(*args, **kwargs):
 
+            man = """
+            You can use:
+            phone |name|
+            add |name| |phone|
+            change |name| |old phone| |new phone|
+            search |text|
+            show all
+            hello
+            [exit, close, good bye] to exit and save.
+            """
+
             try:
                 result = func(*args, **kwargs)
                 return result
             except IndexError as err:
-                return "< help ?"
+                return man
             except KeyError as err:
-                return "< help ?"
+                return man
             except ValueError as err:
-                return "< help ?"
+                return man
             except PhoneNotFoundError as err:
                 return "Phone is not exist in contact!"
 
